@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Employee Leave Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        {% for message in messages %}
+        alert("{{ message }}")
+        {% endfor %}
+    </script>
+    <style>
+             body {
+            background-color: #f8f9fa;
+        }
+
+        .registration-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            animation: fadeInAnimation 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .registration-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: slideInAnimation 1s ease-in-out forwards;
+        }
+
+        @keyframes slideInAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .radio-group input {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="registration-container">
+                    <h2>Registration</h2>
+                    <form method="post" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="college_name">College Name:</label>
+                            <select name="college_name" id="college_name" required>
+                                <option value="College">college</option>
+                                <option value="jntu">JNTU GV</option>
+                                <option value="mvgr">MVGR</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="employee_id" placeholder="Employee Id" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender :</label>
+                            <select name="gender" id="gender" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="Mobile number should be 10 digits long and contain only numbers" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="aadhar" placeholder="Aadhar Number" pattern="[0-9]{12}" title="Aadhaar number should be 12 digits long and contain only numbers" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">Designation:</label>
+                            <select name="designation" id="designation" required>
+                                <option value="Vice Chancellor">Vice Chancellor</option>
+                                <option value="Registrar">Registrar</option>
+                                <option value="Principal">Principal</option>
+                                <option value="HOD">HOD</option>
+                                <option value="Employee">Employee</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="department_name">Department Name:</label>
+                            <select name="department_name" id="department_name" required>
+                                <option value="Administration">Administration</option>
+                                <option value="Examination">Examination</option>
+                                <option value="Academic">Academic</option>
+                                <option value="Computer Science Engineering">Computer Science Engineering</option>
+                                <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                                <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Metallurgical Engineering">Metallurgical Engineering</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Employment Type:</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" id="teaching" name="employment_type" value="teaching" required>
+                                    Teaching
+                                </label>
+                                <label>
+                                    <input type="radio" id="non_teaching" name="employment_type" value="non_teaching" required>
+                                    Non-Teaching
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Employment Status:</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" id="contract" name="employment_status" value="contract" required>
+                                    Contract
+                                </label>
+                                <label>
+                                    <input type="radio" id="regular" name="employment_status" value="regular" required>
+                                    Regular
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Register</button>
+                        </div>
+                    </form>
+                    <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
